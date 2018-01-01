@@ -1,0 +1,283 @@
+# *************************** IMPORTANT ***************************
+# 1. Check your official RMIT student email now for important
+#    instructions by your instructor (Gayan).
+# 2. Don't post your code in any place where others can see
+#    (e.g. forums, facebook, pastebin, stackoverflow, etc.) as RMIT
+#    considers this behaviour a form of academic misconduct and it has
+#    serious consequences.
+# 3. Your instructor will do their best to help but they cannot debug
+#    your code on your behalf as debugging is a part of the learning
+#    outcome of every programming exercise. You can pose your questions
+#    in a general form or replicate the issues in a different example
+#    and ask.
+# 4. If you cannot resolve some issue, _do not_ just put the work
+#    aside. Give details of the steps that you took to find the answer. 
+#    Tutorials are investigative and practice-based learning exercises
+#    and the mark given is based on the effort shown.
+# 5. Only write your answers in the indicated spaces and all code
+#    must be inside functions (within a 'def...') or you will need
+#    to resubmit and this will lead to marking delays.
+#    Even if your code does not work as intended, you must ensure that
+#    your completed .jy file does not show errors when the "load program"
+#    button is selected. 
+# 6. Your tutorial submission may be used for peer review or
+#    demonstration purposes. Please DO NOT include any information
+#    that would make you or any other persons personally identifiable.
+#    E.g. if an exercise requires you to use your name, do not use
+#    your real name. The online submission system keeps track
+#    of the submitting student and you do not need to (and must not)
+#    write any names or student IDs, even in the file name.
+
+
+# *****************************************************************
+# ************************ Tutorial 5 *****************************
+# *****************************************************************
+
+# ******************** Question/Activity 1 ************************
+# Step 1: Programs don't skip over things arbitrarily and neither
+# should you, the programmer. In order to get this tutorial marked
+# you must complete and submit last week's tutorial (via its own link),
+# if you haven't done so already.
+#
+# Step 2: Please watch the 'Tutorial solutions and common
+# mistakes lesson (compulsory)' for the last tutorial,
+# if you haven't done so already.
+#
+# Step 3: For each question/activity in last week's tutorial, what important
+# differences did you notice between the work that you submitted and
+# explanations given during the said chat session?
+#
+# Step 4: Approximately, how many hours did you spend last week on
+# ITP (including reading, lectures, doing assignment, tutorial, etc.)?
+# This information is only used to optimise your learning experience.
+#
+# *** Only write your answers in the space provided below ***
+#
+# ------- Write your response to question/activity 1 below ----------
+# Write your answers below:
+# Everything was very similar this week    
+
+# Approximate time spent on ITP last week:
+# Didn't spend as much time as last week since there were no extra questions from the textbook about 4 hours
+
+# ------- Write your response to question/activity 1 above ----------
+
+
+# ******************** Question/Activity 2 ************************
+# Re-write the 'mirrorVertical' function from slide "12" in the
+# Week 5 lecture slides in the space below and create a driver
+# function to test it. Your driver must be called 'mirrorDriver1'
+# (driver takes no parameters) and it should allow the user to
+# choose a file.
+# Hint: "driver" functions have been explained throughout, starting
+# from week 3 lecture slide "28".
+#
+# Note: Both functions must be written in the space below.
+# ------- Write your answer to question/activity 2 below ----------
+def mirrorVertical(source): # defining vertical copying of image  
+  pic = makePicture(source) # converting image into data
+  width = getWidth(pic) # using getWidth JES function to find the width of the picked image in pixels
+  mirrorPoint = width/2  # choosing the point at which to mirror the image in this case the width of the image / 2
+  for y in range(0, getHeight(pic)):  # setting up pixels to process from the top left corner for the y axis
+    for x in range(0, mirrorPoint):  # setting up pixels to process from the top left corner for the x axis
+      leftPixel = getPixel(pic,x,y)  # setting leftPixel variable
+      rightPixel = getPixel(pic,width-1-x,y)   
+      color = getColor(leftPixel)
+      setColor(rightPixel,color)
+  show(pic)
+
+def mirrorHorizontal(source): # defining vertical copying of image  
+  pic = makePicture(source) # converting image into data
+  width = getWidth(pic) # using getWidth JES function to find the width of the picked image in pixels
+  height = getHeight(pic)
+  mirrorPoint = height/2  # choosing the point at which to mirror the image in this case the height of the image / 2
+  for x in range(0, width):  # setting up pixels to process from the top left corner for the y axis
+    for y in range(0, mirrorPoint):  # setting up pixels to process from the top left corner for the x axis
+      topPixel = getPixel(pic,x,y)  # setting leftPixel variable
+      bottomPixel = getPixel(pic,x,height-1-y)   
+      color = getColor(topPixel)
+      setColor(bottomPixel,color)
+  show(pic)  # processing the data back into an image for the user
+   
+def mirrorDriver1():
+  mirroredVPic = mirrorVertical(pickAFile())
+  mirroredHPic = mirrorHorizontal(pickAFile())
+
+# ------- Write your answer to question/activity 2 above ----------
+
+
+
+# ******************** Question/Activity 3 ************************
+# Slide "7b" in the Week 5 lecture slides shows how to convert
+# between for-loops and while-loops. Re-implement the 'mirrorVertical'
+# function from slide "12" in the Week 5 lecture slides to use only
+# while-loops. Your new function must be called 'mirrorVerticalWhile'
+# and you must not have any for-loops in your final code.
+# Hint: Feel free to write a driver within the space below to test
+# your new code.
+#
+# Optional: Do the same for 'mirrorHorizontal' and create a function
+#   named 'mirrorHorizontalWhile'.
+# ------- Write your answer to question/activity 3 below ----------
+
+def mirrorVerticalWhile(source): # defining vertical copying of image function 
+  pic = makePicture(source) # converting image into data
+  width = getWidth(pic) # using getWidth JES function to find the width of the picked image in pixels
+  mirrorPoint = width/2  # choosing the point at which to mirror the image in this case the width of the image / 2
+  y = 0  # giving the while loop somewhere to start, in this case from 0 which is the top left of the image's y-axis
+  while (y < getHeight(pic)) :  # setting up pixels to process from the top left corner for the y axis
+    x = 0  # giving the while loop somewhere to start, in this case from 0 which is the top left of the image's y-axis
+    while (x < mirrorPoint):  # setting up pixels to process from the top left corner for the x axis
+      leftPixel = getPixel(pic,x,y)  # setting leftPixel variable
+      rightPixel = getPixel(pic,width-1-x,y)   
+      color = getColor(leftPixel)
+      x = x+1  # incrementing x each time the loop is processed
+      setColor(rightPixel,color)
+    y = y+1  # incrementing y each time the external loop is processed
+  show(pic)
+
+def mirrorHorizontalWhile(source): # defining vertical copying of image function  
+  pic = makePicture(source) # converting image into data
+  height = getHeight(pic) # using getWidth JES function to find the width of the picked image in pixels
+  mirrorPoint = height/2  # choosing the point at which to mirror the image in this case the width of the image / 2
+  x = 0  # giving the while loop somewhere to start, in this case from 0 which is the top left of the image's y-axis
+  while (x < getHeight(pic)) :  # setting up pixels to process from the top left corner for the y axis
+    y = 0  # giving the while loop somewhere to start, in this case from 0 which is the top left of the image's y-axis
+    while (y < mirrorPoint):  # setting up pixels to process from the top left corner for the x axis
+      topPixel = getPixel(pic,x,y)  # setting topPixel variable
+      bottomPixel = getPixel(pic,x,height-1-y)   
+      color = getColor(topPixel)
+      y = y+1  # incrementing x each time the loop is processed
+      setColor(bottomPixel,color)
+    x = x+1  # incrementing y each time the external loop is processed
+  show(pic)   
+   
+def mirrorDriver2():
+  mirroredVPic = mirrorVerticalWhile(pickAFile())
+  mirroredHPic = mirrorHorizontalWhile(pickAFile()) 
+  
+# ------- Write your answer to question/activity 3 above ----------
+
+
+# ******************** Question/Activity 4 ************************
+# Implement the partialCopyDriver and makePartialCopyOfPicture
+# functions on slide "9b" in the week 5 lecture slides in the space
+# below (copy and paste) and modify the partialCopyDriver so that
+# the copyWidth and copyHeight values are taken as user inputs.
+# First use requestInteger (never use requestIntegerInRange) to
+# get it to work and then improve your code so that it performs
+# input validation in the style shown on slide "2" of the week 5
+# lecture slides.
+# Hint 1: What's the smallest valid value and the largest valid
+#         value for each input?
+# --------- Write your code for question/activity 4 below ---------  
+
+def makePartialCopyOfPicture(picSource, newWidth, newHeight): # Copied from slides
+  picCopy = makeEmptyPicture(newWidth, newHeight) # creating a blank canvas
+  y = 0  # y axis initialization
+  while(y<newHeight): # setting up the loop
+    x = 0 # x axis initialization
+    while(x < newWidth): 
+      pxSrc = getPixel(picSource,x,y) # aquiring pixels from the original image
+      pxCopy = getPixel(picCopy,x,y)  # copying the source image to the blank canvas created before using the makeEmptyPicture() function
+      setColor(pxCopy,getColor(pxSrc)) 
+      x = x+1 # incrementing x
+    y = y+1 # incrementing y
+  return picCopy # returning the new image to the driver (painted canvas)
+  
+def partialCopyDriver():
+  picA = makePicture(pickAFile())
+  repaint(picA)
+  maxWidth = getWidth(picA)  # Finding the max range for the width of the selected image
+  maxHeight = getHeight(picA)  # Finding the max range for the height of the selected image
+  copyWidth = requestInteger("How wide would you like to crop this picture? to a max of " + str(maxWidth) + " pixels") # Prompting the user  
+  copyHeight = requestInteger("How high would you like to crop this picture? to a max of " + str(maxHeight) + " pixels") # Prompting the user
+  if ((copyWidth <= 0) or (copyHeight <= 0) or (copyWidth > maxWidth) or (copyHeight > maxHeight)): # Error checking all possible errors to do with pixel ranges
+    showError("Invalid range!")  
+    return # If any of the flags are set during the user inputs then the program will give a prompt of Invalid range! and then do nothing or return nothing
+  picB = makePartialCopyOfPicture(picA,copyWidth,copyHeight) # If the input ranges satisfy the conditions set in the if statement then the cropped image will appear
+  repaint(picB) 
+  
+# --------- Write your code for question/activity 4 above ---------
+
+
+
+
+# ************** [Optional] Question/Activity 5 *******************
+# Note: Although this question is optional right now, you must follow
+# the sample solution that Gayan will give after the due date.
+#
+# The makePartialCopyOfPicture function only allows regions starting
+# from the top left corner of the picSource picture object. What
+# if we want to, say, copy just the face of the person in the
+# image? We can do this by offsetting the copying coordinates
+# (currently starting at 0,0) by fixed offsetX and a offsetY amounts
+# (and these will be determined by the user in the driver).
+# Write a new version of the code below under a new named
+# getCropFromPicture that can do the above. You can also create a
+# driver function named cropDriver to test it.
+# Hint 1: What parametric inputs should the getCropFromPicture
+# take? Are they the same as what makePartialCopyOfPicture took or
+# do we need more?
+# Hint 2: What changes do we need to do to the driver if we were
+#         to perform input validation on all four inputs?
+# --------- Write your code for question/activity 5 below ---------
+
+def getCropFromPicture(picSource, xCoord, yCoord, xLen, yLen): # defining input arguments this time asking where to start and where to end the crop
+  width = xLen 
+  height = yLen 
+  picCopy = makeEmptyPicture(width, height) # creating a blank canvas with dimensions provided by the user
+  y = 0 
+  while(y < width): 
+    x = 0 
+    while(x < height):
+      pxSrc = getPixel(picSource,(x+xCoord),(y+yCoord)) 
+      pxCopy = getPixel(picCopy,x,y)  
+      setColor(pxCopy,getColor(pxSrc)) 
+      if (x != height):
+        x = x+1 # incrementing x
+      else:
+        x = height
+    if (y != width):
+      y = y+1 # incrementing y
+    else:
+      y = width
+  
+  return picCopy # returning the new image to the driver (painted canvas)
+  
+  # THIS WORKS ONLY FOR SQUARE CROPS... ERROR FOR RECTANGULAR CROPS
+  # getPixel(picture,x,y): y (= 100) is less than 0 or bigger than the height (= 99)
+  # The error was:
+  # Inappropriate argument value (of correct type).
+  # An error occurred attempting to pass an argument to a function.
+  
+def cropDriver():
+  picA = makePicture(pickAFile())
+  explore(picA)
+  cropXStart = requestInteger("Type x coordinate of crop start")
+  cropYStart = requestInteger("Type y coordinate of crop start")
+  lenCropX = requestInteger("Width of crop from starting coord in px")
+  lenCropY = requestInteger("Height of crop from starting coord in px")
+  
+  picB = getCropFromPicture(picA,cropXStart,cropYStart,lenCropX,lenCropY) 
+  explore(picB) 
+
+# --------- Write your code for question/activity 5 above ---------
+
+
+
+
+# ************** [Optional] Question/Activity 6 *******************
+# Do any questions that you find interesting on page 105 in the link
+# below:
+# https://equella.rmit.edu.au/rmit/file/0dd40e51-d2e4-4c42-9953-78a8da7814a4/1/130124_1_001.pdf
+# Tip: Ask Gayan if you have any questions about these optional questions.
+# --------- Write your code for question/activity 6 below ---------
+# (Code answers must not start with a #. Remove this line and write your answer here).
+# --------- Write your code for question/activity 6 above ---------
+
+
+
+# ******************************************************************************
+# **************************** End of Document *********************************
+# ******************************************************************************
